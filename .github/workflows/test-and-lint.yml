@@ -14,22 +14,20 @@ jobs:
     runs-on: ubuntu-22.04
     # runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Go
-      uses: actions/setup-go@v4
+      uses: actions/setup-go@v5
       with:
         go-version: '1.22.1'
+        cache: false
 
     # - name: Build
     #   run: go build -v ./...
 
-    - name: Vet
-      run: go vet ./...
-
     - name: Test
       run: go test -v ./...
-    
+
     - name: Coverage
       run: |
         go test -coverprofile=coverage.out ./...
@@ -38,14 +36,28 @@ jobs:
         cat coverage.out
       # for html: `$ go tool cover -html=coverage.html.out -o coverage.html`
 
+  vet-and-bench:
+    runs-on: ubuntu-22.04
+    # runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.22.1'
+        cache: false
+
+    - name: Vet
+      run: go vet ./...
+
     - name: Benchmark
       run: go test -bench=. ./...
 
   # https://golangci-lint.run/usage/install#github-actions
   # https://github.com/golangci/golangci-lint-action
-  golangci:
-    name: lint
-    runs-on: ubuntu-latest
+  golangci-lint:
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5

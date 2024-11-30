@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # for local dev and QOL
+# this mirrors and should be kept up-to-date with test-and-lint.yml
 
 echo '    <test> --------------------------------------------------------------------'
 go test ./...
