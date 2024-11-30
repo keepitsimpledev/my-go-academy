@@ -27,7 +27,7 @@ func TestPrintThings(t *testing.T) {
 	got := buffer.String()
 
 	if got != want {
-		t.Errorf("got:\n%s\n\n want:\n%s", got, want)
+		t.Errorf("got:\n%s\n\nwant:\n%s", got, want)
 	}
 }
 
