@@ -32,14 +32,22 @@ bjss.learnamp.com/en/learnlists/golang-academy
 * add necessary PATH exports to `.bashrc` so they don't have to be exported each time the terminal is restarted.
   * example snippet from `.bashrc` with some confirmation echoes:
   ```
+  $ echo go academy startup routine
+  $ echo executing:
   $ echo 'export PATH=$PATH:/usr/local/go/bin # where go is'
-  $ export PATH=$PATH:/usr/local/go/bin # where go is
   $ echo 'export PATH=$PATH:/home/kenny/go/bin # where godoc is'
-  $ export PATH=$PATH:/home/kenny/go/bin # where godoc is
   $ echo 'export PATH=$PATH:/home/kenny/go-bin # where golangci-lint is'
+  $ echo 'which go'
+  $ echo 'which godoc'
+  $ echo 'which golangci-lint'
+  $ echo
+  $ echo output:
+  $ export PATH=$PATH:/usr/local/go/bin # where go is
+  $ export PATH=$PATH:/home/kenny/go/bin # where godoc is
   $ export PATH=$PATH:/home/kenny/go-bin # where golangci-lint is
-  $ echo new PATH:
-  $ echo $PATH
+  $ echo $(which go)
+  $ echo $(which godoc)
+  $ echo $(which golangci-lint)
   ```
 
 ### some useful things

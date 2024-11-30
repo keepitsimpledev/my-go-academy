@@ -36,6 +36,8 @@ func greetingPrefix(language string) (prefix string) {
 	return
 }
 
+// execute this function in the command line with:
+// $ run hello.go
 func main() {
 	fmt.Println(Hello("world", ""))
 }

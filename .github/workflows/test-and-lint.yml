@@ -29,6 +29,14 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+    
+    - name: Coverage
+      run: |
+        go test -coverprofile=coverage.out ./...
+        echo Reminder: coverprofile format is
+        echo '<filepath/><filename>.go:<from line>.<from column>,<to line>.<to column> <number of statements found> <number of times execution>'
+        cat coverage.out
+      # for html: `$ go tool cover -html=coverage.html.out -o coverage.html`
 
     - name: Benchmark
       run: go test -bench=. ./...
