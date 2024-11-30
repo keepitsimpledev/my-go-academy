@@ -54,6 +54,39 @@ jobs:
           # Note: By default, the `.golangci.yml` file should be at the root of the repository.
           # The location of the configuration file can be changed by using `--config=`
           # args: --timeout=30m --config=/my/path/.golangci.yml --issues-exit-code=0 
+          args: >
+            -E asciicheck
+            -E bidichk
+            -E bodyclose
+            -E decorder
+            -E dogsled
+            -E dupl
+            -E dupword
+            -E errname
+            -E exhaustive
+            -E exhaustruct
+            -E gochecknoglobals
+            -E gochecknoinits
+            -E goconst
+            -E godox
+            -E gofmt
+            -E gomnd
+            -E gosec
+            -E lll
+            -E misspell
+            -E nestif
+            -E nilerr
+            -E reassign
+            -E revive
+            -E stylecheck
+            -E thelper
+            -E unconvert
+            -E unparam
+            -E wastedassign
+            -E whitespace
+            -E wrapcheck
+            -E wsl
+          # linters reference https://golangci-lint.run/usage/linters/
 
           # Optional: show only new issues if it's a pull request. The default value is `false`.
           # only-new-issues: true

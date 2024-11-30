@@ -10,6 +10,9 @@ bjss.learnamp.com/en/learnlists/golang-academy
   * check version with `$ go version`
   * `dlv` for debugging: `$ go install -v github.com/go-delve/delve/cmd/dlv@latest`
 * golangci-lint: (https://golangci-lint.run/usage/install/, https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/install-go)
+  * run locally with default enabled libraries: `$ golangci-lint run`
+  * run locally with multiple disabled libraries `$ golangci-lint run -E <library name> -E <library name> ...`
+    * example: `$ golangci-lint run -E gofmt -E revive -E wsl`
 ```
 $ curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.56.2
 $ export PATH=$PATH:/home/kenny/go-bin
@@ -38,3 +41,4 @@ $ source $HOME/.profile
   $ sudo apt install tree # install
   $ tree --dirsfirst # use
   ```
+* use `$ go fmt ./...` to format `go` files in project (doing so should appease the `gofmt` CI check)
