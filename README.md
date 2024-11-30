@@ -1,5 +1,15 @@
 # my-go-academy
-[Go Academy](http://bjss.learnamp.com/en/learnlists/golang-academy)
+The Go Academy was a private pop-up academy.
+
+It was an introduction to Go covering the programming language's syntax, concepts and everyday use.
+
+The academy leveraged several resource types to support a learning journey and a list of assignments to work through. One of the assignments was to build a "To Do Application" with a REST API.
+
+Resources:
+* [Learn Go With Tests](https://quii.gitbook.io/learn-go-with-tests)
+  * this repository primarily consists of "Learn Go With Tests" exercises
+* [Go by example](https://gobyexample.com/)
+* [Learning Go, 2nd Edition](https://www.oreilly.com/library/view/learning-go-2nd/9781098139285/)
 
 ## environment (steps for Windows)
 * wsl ([reference](https://learn.microsoft.com/en-us/windows/wsl/install-manual))
@@ -8,6 +18,7 @@
   * [update linux kernel](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 * ubuntu:
   * https://apps.microsoft.com/detail/9PN20MSR04DW
+    * if installation hangs, [try sending SIGINT](https://github.com/microsoft/WSL/issues/6405)
   * check version with `$ lsb_release -a`
   * to re-install (and destroy/recreate environments):
     1. in Windows Powershell: `PS> wsl --unregister Ubuntu-22.04`
