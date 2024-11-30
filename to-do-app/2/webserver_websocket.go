@@ -10,10 +10,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-const (
-	jsonContentType    = "application/json"
-	upgradedBufferSize = 1024
-)
+const upgradedBufferSize = 1024
 
 //nolint:exhaustruct,gochecknoglobals
 var wsUpgrader = websocket.Upgrader{

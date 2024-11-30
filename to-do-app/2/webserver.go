@@ -7,7 +7,10 @@ import (
 	"text/template"
 )
 
-const htmlTemplatePath = "index.html"
+const (
+	htmlTemplatePath = "index.html"
+	jsonContentType  = "application/json"
+)
 
 type TodoListServer struct {
 	http.Handler
@@ -27,6 +30,8 @@ func NewTodoListServer() (*TodoListServer, error) {
 
 	router := http.NewServeMux()
 	router.Handle("/", http.HandlerFunc(todoListServer.init))
+	router.Handle("/task", http.HandlerFunc(todoListServer.restHandler))
+	router.Handle("/list", http.HandlerFunc(todoListServer.list))
 	router.Handle("/ws", http.HandlerFunc(todoListServer.webSocket))
 	router.Handle("/batch", http.HandlerFunc(todoListServer.batch))
 

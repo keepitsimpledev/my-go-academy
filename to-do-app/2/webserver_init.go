@@ -6,7 +6,12 @@ import (
 	"text/template"
 )
 
-func (server *TodoListServer) init(w http.ResponseWriter, _ *http.Request) {
+func (server *TodoListServer) init(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "only accepts GET", http.StatusBadRequest)
+		return
+	}
+
 	tmpl, parseErr := template.ParseFiles(htmlTemplatePath)
 
 	if parseErr != nil {

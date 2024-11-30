@@ -34,13 +34,13 @@ func Run(inputReader io.Reader, outputWriter io.Writer) {
 
 		switch action {
 		case add:
-			Add(&todoList, outputWriter, bufioInputReader)
+			CmdAdd(&todoList, outputWriter, bufioInputReader)
 		case read:
-			Read(&todoList, outputWriter)
+			CmdRead(&todoList, outputWriter)
 		case update:
-			Update(&todoList, outputWriter, bufioInputReader)
+			CmdUpdate(&todoList, outputWriter, bufioInputReader)
 		case deleteItem:
-			Delete(&todoList, outputWriter, bufioInputReader)
+			CmdDelete(&todoList, outputWriter, bufioInputReader)
 		case exit:
 			fmt.Fprintln(outputWriter, "exiting")
 			return
@@ -72,7 +72,7 @@ func isValidAction(action int) bool {
 	return action >= add && action <= exit
 }
 
-func Add(todoList *ds.TodoList, outputWriter io.Writer, inputReader *bufio.Reader) {
+func CmdAdd(todoList *ds.TodoList, outputWriter io.Writer, inputReader *bufio.Reader) {
 	fmt.Fprintln(outputWriter, "Enter the task:")
 
 	item := readLine(inputReader)
@@ -80,11 +80,11 @@ func Add(todoList *ds.TodoList, outputWriter io.Writer, inputReader *bufio.Reade
 	todoList.Add(item, "Not Started")
 }
 
-func Read(todoList *ds.TodoList, outputWriter io.Writer) {
+func CmdRead(todoList *ds.TodoList, outputWriter io.Writer) {
 	fmt.Fprint(outputWriter, todoList.GetAll())
 }
 
-func Update(todoList *ds.TodoList, outputWriter io.Writer, inputReader *bufio.Reader) {
+func CmdUpdate(todoList *ds.TodoList, outputWriter io.Writer, inputReader *bufio.Reader) {
 	fmt.Fprintln(outputWriter, "Enter the number to update:")
 
 	number := readLine(inputReader)
@@ -109,7 +109,7 @@ func Update(todoList *ds.TodoList, outputWriter io.Writer, inputReader *bufio.Re
 	}
 }
 
-func Delete(todoList *ds.TodoList, outputWriter io.Writer, inputReader *bufio.Reader) {
+func CmdDelete(todoList *ds.TodoList, outputWriter io.Writer, inputReader *bufio.Reader) {
 	fmt.Fprintln(outputWriter, "Enter the number to delete:")
 
 	number := readLine(inputReader)
