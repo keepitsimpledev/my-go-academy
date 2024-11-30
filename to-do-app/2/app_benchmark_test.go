@@ -1,9 +1,9 @@
 package app_test
 
 import (
-	"bytes"
 	"fmt"
 	app "go_academy/to-do-app/2"
+	"io"
 	"strings"
 	"testing"
 )
@@ -25,10 +25,9 @@ func BenchmarkAdd(b *testing.B) {
 
 	input += exitInput
 
-	outputBuffer := bytes.Buffer{}
 	inputReader := strings.NewReader(input)
 
-	app.Run(inputReader, &outputBuffer)
+	app.Run(inputReader, io.Discard)
 }
 
 func BenchmarkAddAndRead(b *testing.B) {
@@ -43,10 +42,9 @@ func BenchmarkAddAndRead(b *testing.B) {
 	input += readInput
 	input += exitInput
 
-	outputBuffer := bytes.Buffer{}
 	inputReader := strings.NewReader(input)
 
-	app.Run(inputReader, &outputBuffer)
+	app.Run(inputReader, io.Discard)
 }
 
 func BenchmarkAddAndUpdate(b *testing.B) {
@@ -66,10 +64,9 @@ func BenchmarkAddAndUpdate(b *testing.B) {
 
 	input += exitInput
 
-	outputBuffer := bytes.Buffer{}
 	inputReader := strings.NewReader(input)
 
-	app.Run(inputReader, &outputBuffer)
+	app.Run(inputReader, io.Discard)
 }
 
 func BenchmarkAddAndDelete(b *testing.B) {
@@ -87,8 +84,7 @@ func BenchmarkAddAndDelete(b *testing.B) {
 
 	input += exitInput
 
-	outputBuffer := bytes.Buffer{}
 	inputReader := strings.NewReader(input)
 
-	app.Run(inputReader, &outputBuffer)
+	app.Run(inputReader, io.Discard)
 }

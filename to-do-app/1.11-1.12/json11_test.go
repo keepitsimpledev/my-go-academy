@@ -3,6 +3,7 @@ package json11and12_test
 import (
 	"bytes"
 	json11 "go_academy/to-do-app/1.11-1.12"
+	"io"
 	"os"
 	"testing"
 )
@@ -56,7 +57,6 @@ func BenchmarkPrintThings(b *testing.B) {
 	ten := json11.Task{Number: 10, Name: "jellybean"}
 
 	for i := 0; i < b.N; i++ {
-		buffer := bytes.Buffer{}
-		json11.PrintTasksToJSON(&buffer, one, two, three, four, five, six, seven, eight, nine, ten)
+		json11.PrintTasksToJSON(io.Discard, one, two, three, four, five, six, seven, eight, nine, ten)
 	}
 }

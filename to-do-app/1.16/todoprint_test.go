@@ -3,6 +3,7 @@ package todoprint_test
 import (
 	"bytes"
 	todoprint "go_academy/to-do-app/1.16"
+	"io"
 	"os"
 	"testing"
 )
@@ -60,7 +61,6 @@ func BenchmarkPrintTasksAndStatuses(b *testing.B) {
 	}
 
 	for i := 0; i < b.N; i++ {
-		buffer := bytes.Buffer{}
-		todoprint.PrintTasksAndStatuses(&buffer, todos)
+		todoprint.PrintTasksAndStatuses(io.Discard, todos)
 	}
 }

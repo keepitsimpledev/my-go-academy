@@ -3,6 +3,7 @@ package sync_test
 import (
 	"bytes"
 	"go_academy/to-do-app/1.15"
+	"io"
 	"testing"
 )
 
@@ -24,7 +25,6 @@ func TestUpdateNumber(t *testing.T) {
 
 func BenchmarkUpdateNumber(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		buffer := bytes.Buffer{}
-		sync.UpdateNumber(&buffer)
+		sync.UpdateNumber(io.Discard)
 	}
 }

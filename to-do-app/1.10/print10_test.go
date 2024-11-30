@@ -3,6 +3,7 @@ package print10_test
 import (
 	"bytes"
 	"go_academy/to-do-app/1.10"
+	"io"
 	"os"
 	"testing"
 )
@@ -48,7 +49,6 @@ func ExamplePrintThings() {
 
 func BenchmarkPrintThings(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		buffer := bytes.Buffer{}
-		print10.PrintThings(&buffer, "cat", "dog", "ant", "fox", "cow", "bee", "elk", "hen", "emu", "bat")
+		print10.PrintThings(io.Discard, "cat", "dog", "ant", "fox", "cow", "bee", "elk", "hen", "emu", "bat")
 	}
 }
