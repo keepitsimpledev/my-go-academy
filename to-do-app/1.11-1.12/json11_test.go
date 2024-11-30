@@ -1,8 +1,8 @@
-package json11_test
+package json11and12_test
 
 import (
 	"bytes"
-	json11 "go_academy/to-do-app/1.11"
+	json11 "go_academy/to-do-app/1.11-1.12"
 	"os"
 	"testing"
 )

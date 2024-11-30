@@ -1,4 +1,4 @@
-package json11
+package json11and12
 
 import (
 	"encoding/json"
