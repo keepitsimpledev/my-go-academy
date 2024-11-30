@@ -4,7 +4,7 @@
 # this mirrors and should be kept up-to-date with test-and-lint.yml
 
 echo '    <test> --------------------------------------------------------------------'
-go test ./...
+go test -race ./...
 echo '    </test> -------------------------------------------------------------------'
 echo
 

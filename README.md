@@ -29,6 +29,12 @@ bjss.learnamp.com/en/learnlists/golang-academy
   $ source $HOME/.profile
   ```
   * run with `godoc -http=:6060`
+* `CGO_ENABLED=1` and `gcc` to enable `go test -race`
+  ```
+  $ go env -w CGO_ENABLED=1
+  $ sudo apt-get update
+  $ sudo apt-get install build-essential gdb
+  ```
 * add necessary PATH exports to `.bashrc` so they don't have to be exported each time the terminal is restarted.
   * example snippet from `.bashrc` with some confirmation echoes:
   ```
