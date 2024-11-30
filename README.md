@@ -5,7 +5,9 @@ bjss.learnamp.com/en/learnlists/golang-academy
 * ubuntu:
   * https://learn.microsoft.com/en-us/windows/wsl/install
   * https://apps.microsoft.com/detail/9PN20MSR04DW
+  * check version with `$ lsb_release -a`
 * go: https://go.dev/doc/install
+  * check version with `$ go version`
 * golangci-lint: (https://golangci-lint.run/usage/install/, https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/install-go)
 ```
 $ curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.56.2
@@ -13,7 +15,8 @@ $ export PATH=$PATH:/home/kenny/go-bin
 $ source $HOME/.profile
 ```
 * vscode: https://code.visualstudio.com/Download
-  * vscode go extension: github.com/golang/vscode-go
+  * go extension: https://marketplace.visualstudio.com/items?itemName=golang.Go
+  * github actions (pipeline) extension: https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions
 * godoc (https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/hello-world):
   ```
   $ sudo apt install net-tools # for ifconfig to find IP address https://linuxiac.com/how-to-find-ip-address-in-linux/
