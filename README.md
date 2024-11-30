@@ -26,9 +26,15 @@ $ source $HOME/.profile
   $ source $HOME/.profile
   ```
 
-reference script template (useful when installing):
-```
-$ export PATH=$PATH:<path to add>
-$ source $HOME/.profile # so it's immedately referrable
-```
+### some useful things
 
+* reference script template (useful when installing):
+  ```
+  $ export PATH=$PATH:<path to add>
+  $ source $HOME/.profile # so it's immedately referrable
+  ```
+* `tree` for easy file/directory structure visualization
+  ```
+  $ sudo apt install tree # install
+  $ tree --dirsfirst # use
+  ```
