@@ -37,6 +37,7 @@ bjss.learnamp.com/en/learnlists/golang-academy
   $ echo 'export PATH=$PATH:/usr/local/go/bin # where go is'
   $ echo 'export PATH=$PATH:/home/kenny/go/bin # where godoc is'
   $ echo 'export PATH=$PATH:/home/kenny/go-bin # where golangci-lint is'
+  $ echo 'echo $PATH'
   $ echo 'which go'
   $ echo 'which godoc'
   $ echo 'which golangci-lint'
@@ -45,6 +46,8 @@ bjss.learnamp.com/en/learnlists/golang-academy
   $ export PATH=$PATH:/usr/local/go/bin # where go is
   $ export PATH=$PATH:/home/kenny/go/bin # where godoc is
   $ export PATH=$PATH:/home/kenny/go-bin # where golangci-lint is
+  $ echo $PATH
+  $ echo
   $ echo $(which go)
   $ echo $(which godoc)
   $ echo $(which golangci-lint)
