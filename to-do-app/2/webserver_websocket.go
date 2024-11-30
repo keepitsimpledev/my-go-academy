@@ -25,8 +25,8 @@ type RawTodoListAction struct {
 	Status string `json:"Status"`
 }
 
-func (server *TodoListServer) webSocket(w http.ResponseWriter, r *http.Request) {
-	conn, _ := wsUpgrader.Upgrade(w, r, nil)
+func (server *TodoListServer) webSocket(responseWriter http.ResponseWriter, request *http.Request) {
+	conn, _ := wsUpgrader.Upgrade(responseWriter, request, nil)
 	defer conn.Close()
 
 	updateList(conn, server)
