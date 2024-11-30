@@ -8,6 +8,7 @@ bjss.learnamp.com/en/learnlists/golang-academy
   * check version with `$ lsb_release -a`
 * go: https://go.dev/doc/install
   * check version with `$ go version`
+  * `dlv` for debugging: `$ go install -v github.com/go-delve/delve/cmd/dlv@latest`
 * golangci-lint: (https://golangci-lint.run/usage/install/, https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/install-go)
 ```
 $ curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.56.2
