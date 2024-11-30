@@ -17,13 +17,13 @@ func PromptAndFormatName(in io.Reader) string {
 
 	var last string
 
-	fmt.Print("Enter first name:")
+	fmt.Print("Enter first name: ")
 	fmt.Fscanln(in, &first)
 
-	fmt.Print("Enter middle name:")
+	fmt.Print("Enter middle name: ")
 	fmt.Fscanln(in, &middle)
 
-	fmt.Print("Enter last name:")
+	fmt.Print("Enter last name: ")
 	fmt.Fscanln(in, &last)
 
 	return fmt.Sprintf("%s %s %s", first, middle, last)
