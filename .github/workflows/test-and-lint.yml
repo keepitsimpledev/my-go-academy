@@ -30,6 +30,9 @@ jobs:
     - name: Test
       run: go test -v ./...
 
+    - name: Benchmark
+      run: go test -bench=. ./...
+
   # https://golangci-lint.run/usage/install#github-actions
   # https://github.com/golangci/golangci-lint-action
   golangci:

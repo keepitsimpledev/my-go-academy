@@ -28,6 +28,7 @@ $ source $HOME/.profile
   $ export PATH=$PATH:/home/kenny/go/bin
   $ source $HOME/.profile
   ```
+  * run with `godoc -http=:6060`
 
 ### some useful things
 
