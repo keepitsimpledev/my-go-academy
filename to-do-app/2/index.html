@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+    <title>To-Do list</title>
+    <style>
+        .action-group {
+          background-color: lightgrey;
+          border: 2px solid grey;
+          padding: 10px;
+          margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="action-group">
+        <label for="add-item">Item</label>
+        <input type="text" id="add-item"/>
+
+        <br/>
+        <label for="add-status">Status</label>
+        <input type="text" id="add-status"/>
+
+        <br/>
+        <button id="add-button">Add</button>
+    </div>
+    <div class="action-group">
+        <label for="update-index">Number</label>
+        <input type="number" id="update-index"/>
+
+        <br/>
+        <label for="update-item">Item</label>
+        <input type="text" id="update-item"/>
+
+        <br/>
+        <label for="update-status">Status</label>
+        <input type="text" id="update-status"/>
+
+        <br/>
+        <button id="update-button">Update</button>
+    </div>
+    <div class="action-group">
+        <label for="delete-index">Number</label>
+        <input type="text" id="delete-index"/>
+
+        <br/>
+        <button id="delete-button">Delete</button>
+    </div>
+    <div id="todo-list" style="padding: 10px; margin: 10px"></div>
+    <script>
+        const addItem = document.getElementById('add-item')
+        const addStatus = document.getElementById('add-status')
+        const addButton = document.getElementById('add-button')
+
+        const updateIndex = document.getElementById('update-index')
+        const updateItem = document.getElementById('update-item')
+        const updateStatus = document.getElementById('update-status')
+        const updateButton = document.getElementById('update-button')
+
+        const deleteIndex = document.getElementById('delete-index')
+        const deleteButton = document.getElementById('delete-button')
+
+        const todoList = document.getElementById('todo-list')
+
+        if (window['WebSocket']) {
+            const conn = new WebSocket('ws://' + document.location.host + '/ws')
+
+            addButton.onclick = event => {
+                var data = JSON.stringify({
+                    "Action": "Add",
+                    "Number": "0",
+                    "Item": addItem.value,
+                    "Status": addStatus.value})
+                conn.send(data)
+            }
+
+            updateButton.onclick = event => {
+                var data = JSON.stringify({
+                    "Action": "Update",
+                    "Number": updateIndex.value,
+                    "Item": updateItem.value,
+                    "Status": updateStatus.value})
+                conn.send(data)
+            }
+
+            deleteButton.onclick = event => {
+                var data = JSON.stringify({
+                    "Action": "Delete",
+                    "Number": updateIndex.value,
+                    "Item": "",
+                    "Status": ""})
+                conn.send(data)
+            }
+
+            conn.onmessage = evt => {
+                todoList.innerText = evt.data
+            }
+
+            conn.onclose = evt => {
+                todoList.innerText = 'Connection closed'
+            }
+        }
+    </script>
+</body>
+</html>

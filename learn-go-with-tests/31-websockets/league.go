@@ -104,11 +104,14 @@ var wsUpgrader = websocket.Upgrader{
 func (p *PlayerServer) webSocket(w http.ResponseWriter, r *http.Request) {
 	conn, _ := wsUpgrader.Upgrade(w, r, nil)
 
+	// example: writes to conn.onmessage() in game.html
+	// conn.WriteMessage(1, []byte("kenny")) //TextMessage=1, BinaryMessage=2
+
 	_, numberOfPlayersMsg, _ := conn.ReadMessage()
 	numberOfPlayers, _ := strconv.Atoi(string(numberOfPlayersMsg))
 	p.game.Start(numberOfPlayers, io.Discard) //to do: Don't discard the blinds messages!
 
-	_, winner, _ := conn.ReadMessage()
+	_, winner, _ := conn.ReadMessage() // this waits for conn.send() from game.html
 	p.game.Finish(string(winner))
 }
 

@@ -2,9 +2,16 @@ package main
 
 import (
 	"go_academy/to-do-app/2"
-	"os"
+	"log"
+	"net/http"
 )
 
 func main() {
-	app.Run(os.Stdin, os.Stdout)
+	server, err := app.NewTodoListServer()
+	if err != nil {
+		panic(err)
+	}
+
+	//nolint:gosec
+	log.Fatal(http.ListenAndServe(":5000", server))
 }
