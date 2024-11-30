@@ -13,11 +13,11 @@ bjss.learnamp.com/en/learnlists/golang-academy
   * run locally with default enabled libraries: `$ golangci-lint run`
   * run locally with multiple disabled libraries `$ golangci-lint run -E <library name> -E <library name> ...`
     * example: `$ golangci-lint run -E gofmt -E revive -E wsl`
-```
-$ curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.56.2
-$ export PATH=$PATH:/home/kenny/go-bin
-$ source $HOME/.profile
-```
+  ```
+  $ curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.56.2
+  $ export PATH=$PATH:/home/kenny/go-bin
+  $ source $HOME/.profile
+  ```
 * vscode: https://code.visualstudio.com/Download
   * go extension: https://marketplace.visualstudio.com/items?itemName=golang.Go
   * github actions (pipeline) extension: https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions
@@ -29,6 +29,18 @@ $ source $HOME/.profile
   $ source $HOME/.profile
   ```
   * run with `godoc -http=:6060`
+* add necessary PATH exports to `.bashrc` so they don't have to be exported each time the terminal is restarted.
+  * example snippet from `.bashrc` with some confirmation echoes:
+  ```
+  $ echo 'export PATH=$PATH:/usr/local/go/bin # where go is'
+  $ export PATH=$PATH:/usr/local/go/bin # where go is
+  $ echo 'export PATH=$PATH:/home/kenny/go/bin # where godoc is'
+  $ export PATH=$PATH:/home/kenny/go/bin # where godoc is
+  $ echo 'export PATH=$PATH:/home/kenny/go-bin # where golangci-lint is'
+  $ export PATH=$PATH:/home/kenny/go-bin # where golangci-lint is
+  $ echo new PATH:
+  $ echo $PATH
+  ```
 
 ### some useful things
 
