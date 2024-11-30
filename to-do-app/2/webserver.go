@@ -28,6 +28,7 @@ func NewTodoListServer() (*TodoListServer, error) {
 	router := http.NewServeMux()
 	router.Handle("/", http.HandlerFunc(todoListServer.init))
 	router.Handle("/ws", http.HandlerFunc(todoListServer.webSocket))
+	router.Handle("/batch", http.HandlerFunc(todoListServer.batch))
 
 	todoListServer.Handler = router
 

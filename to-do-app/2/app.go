@@ -26,7 +26,7 @@ const exit = 5
 
 func Run(inputReader io.Reader, outputWriter io.Writer) {
 	bufioInputReader := bufio.NewReader(inputReader)
-	todoList := ds.TodoList{}
+	todoList := ds.NewList()
 
 	action := 2
 	for isValidAction(action) {
@@ -36,7 +36,7 @@ func Run(inputReader io.Reader, outputWriter io.Writer) {
 		case add:
 			Add(&todoList, outputWriter, bufioInputReader)
 		case read:
-			Read(todoList, outputWriter)
+			Read(&todoList, outputWriter)
 		case update:
 			Update(&todoList, outputWriter, bufioInputReader)
 		case deleteItem:
@@ -80,7 +80,7 @@ func Add(todoList *ds.TodoList, outputWriter io.Writer, inputReader *bufio.Reade
 	todoList.Add(item, "Not Started")
 }
 
-func Read(todoList ds.TodoList, outputWriter io.Writer) {
+func Read(todoList *ds.TodoList, outputWriter io.Writer) {
 	fmt.Fprint(outputWriter, todoList.GetAll())
 }
 

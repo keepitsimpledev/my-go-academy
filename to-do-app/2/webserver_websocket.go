@@ -2,7 +2,6 @@ package app
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -23,12 +22,10 @@ var wsUpgrader = websocket.Upgrader{
 }
 
 type RawTodoListAction struct {
-	Action, Number, Item, Status string
-}
-
-type TodoListAction struct {
-	Number               int
-	Action, Item, Status string
+	Action string `json:"Action"`
+	Number string `json:"Number"`
+	Item   string `json:"Item"`
+	Status string `json:"Status"`
 }
 
 func (server *TodoListServer) webSocket(w http.ResponseWriter, r *http.Request) {
@@ -42,18 +39,7 @@ func (server *TodoListServer) webSocket(w http.ResponseWriter, r *http.Request) 
 		action, processInputErr := processInput(rawData)
 		panicIfErr(processInputErr)
 
-		switch action.Action {
-		case "Add":
-			server.todoList.Add(action.Item, action.Status)
-		case "Update":
-			err := server.todoList.Update(action.Number, action.Item, action.Status)
-			panicIfErr(err)
-		case "Delete":
-			err := server.todoList.Delete(action.Number)
-			panicIfErr(err)
-		default:
-			panic(errors.New("unexpected action: " + action.Action))
-		}
+		processAction(&server.todoList, action)
 
 		updateList(conn, server)
 

@@ -84,7 +84,7 @@
             deleteButton.onclick = event => {
                 var data = JSON.stringify({
                     "Action": "Delete",
-                    "Number": updateIndex.value,
+                    "Number": deleteIndex.value,
                     "Item": "",
                     "Status": ""})
                 conn.send(data)

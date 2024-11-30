@@ -146,12 +146,12 @@ func TestDelete(t *testing.T) {
 	task2 := task{"do laundry", "in-progress"}
 	task3 := task{"take a nap", "complete"}
 
-	populate3Tasks := func() TodoList {
+	populate3Tasks := func() *TodoList {
 		var todoList TodoList
 
 		todoList.tasks = append(todoList.tasks, task1, task2, task3)
 
-		return todoList
+		return &todoList
 	}
 
 	t.Run("delete first", func(t *testing.T) {
