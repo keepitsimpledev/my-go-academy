@@ -1,10 +1,9 @@
 # my-go-academy
 <details>
-  <summary>The Go Academy was a pop-up academy provided by [bjss](https://www.bjss.com/).</summary>
-  
-  The Academy was an introduction to Go covering the programming language's syntax, concepts and everyday use.
- 
-  The Academy leveraged several resource types to support a learning journey and a list of assignments to work through. One of the assignments was to build a "To Do Application" with a REST API.
+  <summary>The Go Academy was a pop-up academy provided by https://www.bjss.com/.</summary>
+  > The Academy was an introduction to Go covering the programming language's syntax, concepts and everyday use.
+  >
+  > The Academy leveraged several resource types to support a learning journey and a list of assignments to work through. One of the assignments was to build a "To Do Application" with a REST API.
 </details>
 
 Resources:
