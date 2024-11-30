@@ -1,5 +1,5 @@
 # my-go-academy
-[Go Academy](bjss.learnamp.com/en/learnlists/golang-academy)
+[Go Academy](http://bjss.learnamp.com/en/learnlists/golang-academy)
 
 ## environment
 * ubuntu:
