@@ -2,6 +2,7 @@ package racer
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 )
@@ -29,10 +30,11 @@ func ping(url string) chan struct{} {
 		//nolint:gosec
 		response, err := http.Get(url)
 		if err != nil {
-			panic(err)
+			log.Printf("ping error: %v\n", err.Error())
+		} else {
+			response.Body.Close()
 		}
 
-		response.Body.Close()
 		close(ch)
 	}()
 
