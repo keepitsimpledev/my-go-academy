@@ -1,0 +1,42 @@
+[
+    {
+        "Priority": 1,
+        "Task": "wash clothes"
+    },
+    {
+        "Priority": 2,
+        "Task": "fold clothes"
+    },
+    {
+        "Priority": 3,
+        "Task": "wash dishes"
+    },
+    {
+        "Priority": 4,
+        "Task": "buy groceries"
+    },
+    {
+        "Priority": 5,
+        "Task": "pay bills"
+    },
+    {
+        "Priority": 6,
+        "Task": "take a nap"
+    },
+    {
+        "Priority": 7,
+        "Task": "mop the floor"
+    },
+    {
+        "Priority": 8,
+        "Task": "clean the bathtub"
+    },
+    {
+        "Priority": 9,
+        "Task": "iron shirts"
+    },
+    {
+        "Priority": 10,
+        "Task": "mow the lawn"
+    }
+]
