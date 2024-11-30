@@ -2,18 +2,25 @@ package ds
 
 import "fmt"
 
-type task struct {
+type Task struct {
 	item, status string
 }
 
-func (t task) getItem() string {
+func NewTask(item, status string) Task {
+	return Task{
+		item:   item,
+		status: status,
+	}
+}
+
+func (t Task) GetItem() string {
 	return t.item
 }
 
-func (t task) getStatus() string {
+func (t Task) GetStatus() string {
 	return t.status
 }
 
-func (t task) String() string {
+func (t Task) String() string {
 	return fmt.Sprintf("%s - %s", t.item, t.status)
 }

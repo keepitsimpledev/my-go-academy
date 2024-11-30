@@ -10,11 +10,11 @@ const oobErrorMessage = "index out-of-bounds"
 
 type TodoList struct {
 	mu    sync.Mutex
-	tasks []task
+	tasks []Task
 }
 
 func NewList() TodoList {
-	var tasks []task
+	var tasks []Task
 
 	return TodoList{
 		mu:    sync.Mutex{},
@@ -25,23 +25,23 @@ func NewList() TodoList {
 func (tl *TodoList) Add(item, status string) {
 	tl.mu.Lock()
 
-	task := task{item, status}
+	task := Task{item, status}
 	tl.tasks = append(tl.tasks, task)
 
 	tl.mu.Unlock()
 }
 
-func (tl *TodoList) Get(index int) (string, error) {
+func (tl *TodoList) Get(index int) (Task, error) {
 	tl.mu.Lock()
 
-	var task string
+	var task Task
 
 	var err error
 
 	if index >= len(tl.tasks) {
 		err = errors.New(oobErrorMessage)
 	} else {
-		task = tl.tasks[index].String()
+		task = tl.tasks[index]
 	}
 
 	tl.mu.Unlock()

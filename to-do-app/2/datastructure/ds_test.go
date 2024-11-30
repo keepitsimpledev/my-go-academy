@@ -6,10 +6,10 @@ const item = "wash dishes"
 const status = "not started"
 
 func TestTask(t *testing.T) {
-	task := task{item, status}
+	task := Task{item, status}
 
-	assert(t, task.getItem(), item)
-	assert(t, task.getStatus(), status)
+	assert(t, task.GetItem(), item)
+	assert(t, task.GetStatus(), status)
 	assert(t, task.String(), "wash dishes - not started")
 }
 
@@ -50,11 +50,12 @@ func TestAdd(t *testing.T) {
 func TestGet(t *testing.T) {
 	var todoList TodoList
 
-	todoList.tasks = append(todoList.tasks, task{item, status})
+	testTask := Task{item, status}
+	todoList.tasks = append(todoList.tasks, testTask)
 
 	t.Run("standard get", func(t *testing.T) {
 		got, _ := todoList.Get(0)
-		assert(t, got, "wash dishes - not started")
+		assert(t, got, testTask)
 	})
 
 	t.Run("out-of-bounds", func(t *testing.T) {
@@ -68,7 +69,7 @@ func TestGetAll(t *testing.T) {
 		// arrange
 		var todoList TodoList
 
-		todoList.tasks = append(todoList.tasks, task{"item 1", "status 1"}, task{"item 2", "status 2"})
+		todoList.tasks = append(todoList.tasks, Task{"item 1", "status 1"}, Task{"item 2", "status 2"})
 		want := "To-Do list:\n1. item 1 - status 1\n2. item 2 - status 2\n"
 
 		// act
@@ -109,7 +110,7 @@ func TestUpdate(t *testing.T) {
 	})
 
 	t.Run("update", func(t *testing.T) {
-		todoList.tasks = append(todoList.tasks, task{item, status})
+		todoList.tasks = append(todoList.tasks, Task{item, status})
 
 		err := todoList.Update(0, "do laundry", "in-progress")
 
@@ -134,7 +135,7 @@ func TestDelete(t *testing.T) {
 	t.Run("delete one of one", func(t *testing.T) {
 		var todoList TodoList
 
-		todoList.tasks = append(todoList.tasks, task{item, status})
+		todoList.tasks = append(todoList.tasks, Task{item, status})
 
 		err := todoList.Delete(0)
 
@@ -142,9 +143,9 @@ func TestDelete(t *testing.T) {
 		assert(t, len(todoList.tasks), 0)
 	})
 
-	task1 := task{"wash dishes", "not started"}
-	task2 := task{"do laundry", "in-progress"}
-	task3 := task{"take a nap", "complete"}
+	task1 := Task{"wash dishes", "not started"}
+	task2 := Task{"do laundry", "in-progress"}
+	task3 := Task{"take a nap", "complete"}
 
 	populate3Tasks := func() *TodoList {
 		var todoList TodoList
@@ -160,7 +161,7 @@ func TestDelete(t *testing.T) {
 		err := todoList.Delete(0)
 
 		assert(t, err, nil)
-		assertTaskList(t, todoList.tasks, []task{task2, task3})
+		assertTaskList(t, todoList.tasks, []Task{task2, task3})
 	})
 
 	t.Run("delete middle", func(t *testing.T) {
@@ -169,7 +170,7 @@ func TestDelete(t *testing.T) {
 		err := todoList.Delete(1)
 
 		assert(t, err, nil)
-		assertTaskList(t, todoList.tasks, []task{task1, task3})
+		assertTaskList(t, todoList.tasks, []Task{task1, task3})
 	})
 
 	t.Run("delete last", func(t *testing.T) {
@@ -178,7 +179,7 @@ func TestDelete(t *testing.T) {
 		err := todoList.Delete(2)
 
 		assert(t, err, nil)
-		assertTaskList(t, todoList.tasks, []task{task1, task2})
+		assertTaskList(t, todoList.tasks, []Task{task1, task2})
 	})
 }
 
@@ -190,7 +191,7 @@ func assert(tb testing.TB, got, want any) {
 	}
 }
 
-func assertTaskList(tb testing.TB, got, want []task) {
+func assertTaskList(tb testing.TB, got, want []Task) {
 	tb.Helper()
 
 	if len(got) != len(want) {

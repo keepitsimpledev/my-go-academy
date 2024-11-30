@@ -2,6 +2,7 @@ package app
 
 import (
 	"encoding/json"
+	"go_academy/to-do-app/2/datastructure"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -11,11 +12,12 @@ import (
 func TestAdd(t *testing.T) {
 	server := createNewServer()
 
+	task := ds.NewTask("wash dishes", "Not Started")
 	addAction := TodoListAction{
 		Action: "Add",
 		Number: 0,
-		Item:   "wash dishes",
-		Status: "Not Started",
+		Item:   task.GetItem(),
+		Status: task.GetStatus(),
 	}
 	request := actionToRequest(addAction, http.MethodPut)
 
@@ -24,20 +26,39 @@ func TestAdd(t *testing.T) {
 	got, getErr := server.todoList.Get(0)
 	panicIfErr(getErr)
 
-	want := "wash dishes - Not Started"
+	want := task
+	assert(t, got, want)
+}
+
+func TestRead(t *testing.T) {
+	server := createNewServer()
+	task := ds.NewTask("wash dishes", "Not Started")
+
+	server.todoList.Add(task.GetItem(), task.GetStatus())
+
+	readRequest := httptest.NewRequest(http.MethodGet, "/task/1", nil)
+
+	server.restHandler(createResponse(), readRequest)
+
+	got, getErr := server.todoList.Get(0)
+	panicIfErr(getErr)
+
+	want := task
 	assert(t, got, want)
 }
 
 func TestUpdate(t *testing.T) {
 	server := createNewServer()
+	initialTask := ds.NewTask("wash dishes", "Not Started")
 
-	server.todoList.Add("wash dishes", "Not Started")
+	server.todoList.Add(initialTask.GetItem(), initialTask.GetStatus())
 
+	updateTask := ds.NewTask(initialTask.GetItem(), "Complete")
 	updateAction := TodoListAction{
 		Action: "Update",
 		Number: 1,
-		Item:   "wash dishes",
-		Status: "Complete",
+		Item:   updateTask.GetItem(),
+		Status: updateTask.GetStatus(),
 	}
 	updateRequest := actionToRequest(updateAction, http.MethodPut)
 
@@ -46,7 +67,7 @@ func TestUpdate(t *testing.T) {
 	got, getErr := server.todoList.Get(0)
 	panicIfErr(getErr)
 
-	want := "wash dishes - Complete"
+	want := updateTask
 	assert(t, got, want)
 }
 
@@ -94,7 +115,7 @@ func createResponse() *httptest.ResponseRecorder {
 	return response
 }
 
-func assert(tb testing.TB, got, want string) {
+func assert(tb testing.TB, got, want any) {
 	tb.Helper()
 
 	if got != want {

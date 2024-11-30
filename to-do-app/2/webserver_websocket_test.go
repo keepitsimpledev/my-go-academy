@@ -27,11 +27,12 @@ func TestWebsocket(t *testing.T) {
 	// confirm initial state
 	assertWebsocketGotMsg(t, conn, "To-Do list is empty\n")
 
+	task := ds.NewTask("wash dishes", "Not Started")
 	action := RawTodoListAction{
 		Action: "Add",
 		Number: "0",
-		Item:   "wash dishes",
-		Status: "Not Started",
+		Item:   task.GetItem(),
+		Status: task.GetStatus(),
 	}
 	rawAction, marshalErr := json.Marshal(action)
 	panicIfErr(marshalErr)
@@ -40,7 +41,7 @@ func TestWebsocket(t *testing.T) {
 	writeWSMessage(t, conn, string(rawAction))
 
 	// assert
-	assertMessage(t, &todoListServer.todoList, "wash dishes - Not Started")
+	assertMessage(t, &todoListServer.todoList, task)
 	assertWebsocketGotMsg(t, conn, "To-Do list:\n1. wash dishes - Not Started\n")
 }
 
@@ -65,7 +66,7 @@ func writeWSMessage(tb testing.TB, conn *websocket.Conn, message string) {
 	}
 }
 
-func assertMessage(tb testing.TB, todoList *ds.TodoList, want string) {
+func assertMessage(tb testing.TB, todoList *ds.TodoList, want ds.Task) {
 	tb.Helper()
 
 	passed := retryUntil(testTimeoutMs*time.Millisecond, func() bool {

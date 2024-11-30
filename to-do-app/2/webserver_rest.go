@@ -5,14 +5,58 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strconv"
+	"strings"
 )
 
 func (server *TodoListServer) restHandler(responseWriter http.ResponseWriter, request *http.Request) {
-	if request.Method == http.MethodPut || request.Method == http.MethodDelete {
+	if request.Method == http.MethodGet {
+		getExec(responseWriter, request, server)
+	} else if request.Method == http.MethodPut || request.Method == http.MethodDelete {
 		restExec(responseWriter, request, server)
 	} else {
 		http.Error(responseWriter, "only accepts PUT and DELETE", http.StatusBadRequest)
 	}
+}
+
+func getExec(responseWriter http.ResponseWriter, request *http.Request, server *TodoListServer) {
+	path := strings.Split(request.RequestURI, "/")
+	if len(path) < 2 || path[len(path)-2] != "task" {
+		http.Error(responseWriter, fmt.Sprintf("invalid path: %s", request.RequestURI), http.StatusBadRequest)
+		return
+	}
+
+	index, atoiErr := strconv.Atoi(path[len(path)-1])
+	if atoiErr != nil {
+		http.Error(responseWriter, fmt.Sprintf("parse error: %s", atoiErr.Error()), http.StatusInternalServerError)
+		return
+	}
+
+	task, getErr := server.todoList.Get(index - 1)
+	if getErr != nil {
+		http.Error(responseWriter, fmt.Sprintf("failed to retrieve task: %s", getErr.Error()), http.StatusInternalServerError)
+		return
+	}
+
+	marshallableTask := struct{ Item, Status string }{
+		Item:   task.GetItem(),
+		Status: task.GetStatus(),
+	}
+
+	taskBytes, marshalErr := json.Marshal(&marshallableTask)
+	if marshalErr != nil {
+		http.Error(responseWriter, fmt.Sprintf("failed to parse task: %s", marshalErr.Error()),
+			http.StatusInternalServerError)
+		return
+	}
+
+	_, writeErr := responseWriter.Write(taskBytes)
+	if writeErr != nil {
+		http.Error(responseWriter, fmt.Sprintf("write failure: %s", writeErr.Error()), http.StatusInternalServerError)
+		return
+	}
+
+	responseWriter.WriteHeader(http.StatusAccepted)
 }
 
 func restExec(responseWriter http.ResponseWriter, request *http.Request, server *TodoListServer) {

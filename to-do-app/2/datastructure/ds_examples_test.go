@@ -13,7 +13,7 @@ func ExampleTodoList_Add() {
 
 func ExampleTodoList_Get() {
 	var list TodoList
-	list.tasks = append(list.tasks, task{"wash dishes", "complete"})
+	list.tasks = append(list.tasks, Task{"wash dishes", "complete"})
 
 	entry, _ := list.Get(0)
 
@@ -24,9 +24,9 @@ func ExampleTodoList_Get() {
 func ExampleTodoList_GetAll() {
 	var list TodoList
 	list.tasks = append(list.tasks,
-		task{"wash dishes", "complete"},
-		task{"submit taxes", "not started"},
-		task{"take a nap", "in-progress"},
+		Task{"wash dishes", "complete"},
+		Task{"submit taxes", "not started"},
+		Task{"take a nap", "in-progress"},
 	)
 
 	output := list.GetAll()
@@ -40,7 +40,7 @@ func ExampleTodoList_GetAll() {
 
 func ExampleTodoList_Update() {
 	var list TodoList
-	list.tasks = append(list.tasks, task{"take a nap", "not started"})
+	list.tasks = append(list.tasks, Task{"take a nap", "not started"})
 
 	err := list.Update(0, "take a nap", "complete")
 	if err != nil {
@@ -53,7 +53,7 @@ func ExampleTodoList_Update() {
 
 func ExampleTodoList_Delete() {
 	var list TodoList
-	list.tasks = append(list.tasks, task{"wash dishes", "complete"})
+	list.tasks = append(list.tasks, Task{"wash dishes", "complete"})
 
 	err := list.Delete(0)
 	if err != nil {
