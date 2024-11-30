@@ -2,6 +2,10 @@
 
 # for local dev and QOL
 # this mirrors and should be kept up-to-date with test-and-lint.yml
+echo '    <build> -------------------------------------------------------------------'
+go build -v ./...
+echo '    </build> ------------------------------------------------------------------'
+echo
 
 echo '    <test> --------------------------------------------------------------------'
 go test -race ./...
