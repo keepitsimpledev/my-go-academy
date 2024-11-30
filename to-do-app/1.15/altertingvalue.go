@@ -16,8 +16,8 @@ func (a *AlertingValue) updateAndAlert(addAmount int) {
 	a.mu.Lock()
 	a.value += addAmount
 	a.numUpdates++
-	a.mu.Unlock()
 	fmt.Fprintf(a.writer, "value: %d. numUpdates: %d\n", a.value, a.numUpdates)
+	a.mu.Unlock()
 }
 
 func (a *AlertingValue) GetNumUpdates() int {
