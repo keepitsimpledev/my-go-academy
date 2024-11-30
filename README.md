@@ -1,24 +1,29 @@
 # my-go-academy
 [Go Academy](http://bjss.learnamp.com/en/learnlists/golang-academy)
 
-## environment
+## environment (steps for Windows)
+* wsl ([reference](https://learn.microsoft.com/en-us/windows/wsl/install-manual))
+  * in "Windows Features", ensure "Virtual Machine Platform" and "Windows Subsystem for Linux" are enabled
+  * in powershell, set version 2 as default with `$ wsl --set-default-version 2`
+  * [update linux kernel](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 * ubuntu:
-  * https://learn.microsoft.com/en-us/windows/wsl/install
   * https://apps.microsoft.com/detail/9PN20MSR04DW
   * check version with `$ lsb_release -a`
 * go: https://go.dev/doc/install
   * check version with `$ go version`
   * `dlv` for debugging: `$ go install -v github.com/go-delve/delve/cmd/dlv@latest`
-* golangci-lint: (https://golangci-lint.run/usage/install/, https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/install-go)
+* golangci-lint: (https://golangci-lint.run/welcome/install/, https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/install-go)
+  ```
+  ## install steps:
+  $ curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.56.2
+  $ export PATH=$PATH:/home/kenny/go/bin
+  $ source $HOME/.profile
+  ```
   * run locally with default enabled libraries: `$ golangci-lint run`
   * run locally with multiple disabled libraries `$ golangci-lint run -E <library name> -E <library name> ...`
     * example: `$ golangci-lint run -E gofmt -E revive -E wsl`
-  ```
-  $ curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.56.2
-  $ export PATH=$PATH:/home/kenny/go-bin
-  $ source $HOME/.profile
-  ```
 * vscode: https://code.visualstudio.com/Download
+  * wsl extension: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl
   * go extension: https://marketplace.visualstudio.com/items?itemName=golang.Go
   * github actions (pipeline) extension: https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions
 * godoc (https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/hello-world):
@@ -49,9 +54,8 @@
   $ echo 'which golangci-lint'
   $ echo
   $ echo output:
-  $ export PATH=$PATH:/usr/local/go/bin # where go is
+  $ export PATH=$PATH:/usr/local/go/bin # where go and golangci-lint are
   $ export PATH=$PATH:/home/kenny/go/bin # where godoc is
-  $ export PATH=$PATH:/home/kenny/go-bin # where golangci-lint is
   $ echo $PATH
   $ echo
   $ echo $(which go)
@@ -71,4 +75,3 @@
   $ sudo apt install tree # install
   $ tree --dirsfirst # use
   ```
-* use `$ go fmt ./...` to format `go` files in project (doing so should appease the `gofmt` CI check)
